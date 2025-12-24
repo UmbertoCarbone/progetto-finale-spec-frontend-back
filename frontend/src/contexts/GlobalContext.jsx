@@ -10,25 +10,21 @@ function GlobalProvider({ children }) {
     async function fetchProducts() {
       try {
         const res = await fetch(url);
-
+      console.log("%cFETCH ESEGUITO VERSO LA VARIABILE D'AMBIENTE:" , "color: green; font-weight: bold;" , "VITE_REACT_APP_URL_JSON:");
         // Controllo status HTTP
         if (!res.ok) {
           throw new Error(`Errore HTTP: ${res.status}`);
         }
-
         const data = await res.json();
-        console.log("Dati ricevuti dal fetch:", data);
-
+        console.log("%cDati ricevuti dal fetch:", "color: green; font-weight: bold;", data);
         // Controllo se data è un array
         if (!Array.isArray(data)) {
           throw new Error("I dati ricevuti non sono un array!");
         }
-
         // Controllo se l'array è vuoto
         if (data.length === 0) {
           console.warn("Nessun prodotto trovato!");
         }
-
         setProducts(data);
       } catch (err) {
         console.error("Errore fetch:", err);
