@@ -1,7 +1,7 @@
 import useSingleFetchID from "../hooks/useSingleFetchID";
 import forzahorizon from "../assets/forzahorizon.jpg";
 import Footer from "../components/Footer";
-
+import CanvasButton from "../components/CanvasButton";
 export default function SinglePage() {
   const product = useSingleFetchID();
 
@@ -47,6 +47,7 @@ export default function SinglePage() {
                 <strong>Descrizione:</strong> <br />
                 {product?.description || "Nessuna descrizione disponibile."}
               </p>
+              <CanvasButton product={product} />
             </div>
           </div>
         </div>
