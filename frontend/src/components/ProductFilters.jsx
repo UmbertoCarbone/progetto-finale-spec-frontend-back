@@ -20,16 +20,19 @@ export default function ProductFilters({ products }) {
   );
 
   // Ordina i prodotti
-  const sortedProducts =filteredProducts.sort((a, b) => {
-    if (order === "title-asc") return a.title.localeCompare(b.title);
-    if (order === "title-desc") return b.title.localeCompare(a.title);
-    if (order === "category-asc") return a.category.localeCompare(b.category);
-    if (order === "category-desc") return b.category.localeCompare(a.category);
-    
-    return 0;
+  const sortedProducts = filteredProducts.sort((a, b) => {
+    if (order === "title-asc") {
+      return a.title.localeCompare(b.title);
+    } else if (order === "title-desc") {
+      return b.title.localeCompare(a.title);
+    } else if (order === "category-asc") {
+      return a.category.localeCompare(b.category);
+    } else if (order === "category-desc") {
+      return b.category.localeCompare(a.category);
+    } else {
+      return 0;
+    }
   });
-console.log("Sorted Products:", sortedProducts);
-  
 
   return (
     <>
