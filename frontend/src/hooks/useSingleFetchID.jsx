@@ -27,7 +27,7 @@ export default function useSingleFetchID() {
         console.log(
           "%cDati ricevuti dal fetch per ID:",
           "color: #00bfff; font-weight: bold;",
-          data
+          id
         );
         const prod = data.product ? data.product : data;
         if (!prod || Object.keys(prod).length === 0) {
