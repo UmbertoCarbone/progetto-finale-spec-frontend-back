@@ -1,10 +1,12 @@
 import useSingleFetchID from "../hooks/useSingleFetchID";
 import forzahorizon from "../assets/forzahorizon.jpg";
+import Footer from "../components/Footer";
 
 export default function SinglePage() {
   const product = useSingleFetchID();
 
   return (
+    <>
     <div className="container py-5 d-flex justify-content-center">
       <div className="card shadow" style={{ maxWidth: "600px", width: "100%" }}>
         <div className="row g-0">
@@ -50,5 +52,7 @@ export default function SinglePage() {
         </div>
       </div>
     </div>
+     <Footer />
+     </>
   );
 }

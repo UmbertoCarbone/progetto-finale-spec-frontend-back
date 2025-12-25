@@ -18,12 +18,13 @@ export default function AllCard({ products }) {
               <div className="card-body text-center">
                 <h5 className="card-title">{product.title}</h5>
                 <p className="card-text">{product.category}</p>
-                {/* Altri dettagli qui */}
               </div>
             </div>
           </Link>
         </div>
       ))}
+      <hr />
+      
     </div>
   );
 }
