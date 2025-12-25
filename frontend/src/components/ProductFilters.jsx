@@ -20,7 +20,7 @@ export default function ProductFilters({ products }) {
   );
 
   // Ordina i prodotti
-  const sortedProducts = filteredProducts.sort((a, b) => {
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (order === "title-asc") {
       return a.title.localeCompare(b.title);
     } else if (order === "title-desc") {
@@ -36,9 +36,10 @@ export default function ProductFilters({ products }) {
 
   return (
     <>
-      <div className="mb-4 row justify-content-center">
+      <div className="mb-4 row justify-content-center text-center">
         {/* Input ricerca titolo */}
         <div className="col-12 col-md-3 mb-2 mb-md-0">
+          <label className="form-label fw-bold">Cerca Titolo</label>
           <input
             type="text"
             value={inputTitle}
@@ -49,6 +50,7 @@ export default function ProductFilters({ products }) {
         </div>
         {/* Select categoria */}
         <div className="col-12 col-md-3 mb-2 mb-md-0">
+          <label className="form-label fw-bold">Cerca Categoria</label>
           <select
             className="form-select"
             value={selectedCategory}
@@ -63,7 +65,8 @@ export default function ProductFilters({ products }) {
           </select>
         </div>
         {/* Select ordinamento */}
-        <div className="col-12 col-md-3">
+        <div className="col-12 col-md-3 mb-2 mb-md-0 ">
+          <label className="form-label fw-bold">Cerca per ordine</label>
           <select
             className="form-select"
             value={order}

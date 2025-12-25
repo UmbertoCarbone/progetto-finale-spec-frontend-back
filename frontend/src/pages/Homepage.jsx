@@ -10,10 +10,11 @@ export default function Homepage() {
     <div>
       <HeaderHomepage />
       <div className="container">
-        <h1 className="text-center p-5">Titolo del momento</h1>
+        <h1 className="text-center p-5">I MIGLIORI GIOCHI</h1>
         <ProductFilters products={products} />
       </div>
       <Footer />
     </div>
   );
 }
+ 
