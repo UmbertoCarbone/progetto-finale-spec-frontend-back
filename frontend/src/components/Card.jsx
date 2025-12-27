@@ -1,0 +1,54 @@
+import useProductFetch from "../contexts/useProductFetch.jsx";
+
+export default function Card({
+  productId,
+  onCompare,
+  isCompared,
+  onFavorite,
+  isFavorite,
+}) {
+  const item = useProductFetch(productId);
+
+  if (!item)
+    return <div className="col-md-4 mb-4 text-center p-5">Caricamento...</div>;
+
+  return (
+    <div className="col-md-4 mb-4">
+      <div className="card h-100 shadow-sm position-relative">
+        {/* Tasto Cuore (Preferiti) */}
+        <button
+          className="btn position-absolute top-0 end-0 m-2 shadow-sm"
+          style={{
+            zIndex: 10,
+            borderRadius: "50%",
+            backgroundColor: isFavorite ? "#ff4d4d" : "white",
+          }}
+          onClick={() => onFavorite(productId)}
+        >
+          {isFavorite ? "❤️" : "🤍"}
+        </button>
+
+        <img
+          src={item.imageUrl}
+          className="card-img-top"
+          style={{ height: "200px", objectFit: "cover" }}
+          alt={item.title}
+        />
+
+        <div className="card-body d-flex flex-column">
+          <h5 className="card-title text-center">{item.title}</h5>
+          <div className="d-flex gap-2 mt-auto">
+            <button
+              className={`btn btn-sm flex-grow-1 ${
+                isCompared ? "btn-success" : "btn-primary"
+              }`}
+              onClick={() => onCompare(productId)}
+            >
+              {isCompared ? "In Confronto" : "Confronta"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

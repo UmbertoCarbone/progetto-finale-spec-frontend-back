@@ -1,44 +1,29 @@
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { GlobalContext } from "./useGlobalContext.jsx";
 
-const GlobalContext = createContext();
-
-function GlobalProvider({ children }) {
+export default function GlobalProvider({ children }) {
   const [products, setProducts] = useState([]);
   const url = import.meta.env.VITE_REACT_APP_URL_JSON;
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const res = await fetch(url);
-      console.log("%cFETCH ESEGUITO VERSO LA VARIABILE D'AMBIENTE:" , "color: green; font-weight: bold;" , "VITE_REACT_APP_URL_JSON:");
-        // Controllo status HTTP
-        if (!res.ok) {
-          throw new Error(`Errore HTTP: ${res.status}`);
-        }
-        const data = await res.json();
-        console.log("%cDati ricevuti dal fetch:", "color: green; font-weight: bold;", data);
-        // Controllo se data è un array
-        if (!Array.isArray(data)) {
-          throw new Error("I dati ricevuti non sono un array!");
-        }
-        // Controllo se l'array è vuoto
-        if (data.length === 0) {
-          console.warn("Nessun prodotto trovato!");
-        }
+    console.log("Eseguo fetch su:", url);
+    fetch(url)
+      .then((res) => {
+        console.log("Risposta fetch:", res);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Dati ricevuti:", data);
         setProducts(data);
-      } catch (err) {
-        console.error("Errore fetch:", err);
-        setProducts([]); // opzionale: svuota prodotti in caso di errore
-      }
-    }
-    fetchProducts();
+      })
+      .catch((err) => {
+        console.error("Errore fetch lista:", err);
+      });
   }, [url]);
 
   return (
-    <GlobalContext.Provider value={{ products, setProducts }}>
+    <GlobalContext.Provider value={{ products }}>
       {children}
     </GlobalContext.Provider>
   );
 }
-
-export { GlobalContext, GlobalProvider };

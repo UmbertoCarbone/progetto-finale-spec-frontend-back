@@ -1,6 +1,9 @@
-import { useContext } from "react";
-import { GlobalContext } from "./GlobalContext.jsx";
+import { createContext, useContext } from "react";
 
-export function useGlobalContext() {
+// Creiamo il Context qui dentro
+export const GlobalContext = createContext();
+
+// Esportiamo l'hook come default
+export default function useGlobalContext() {
   return useContext(GlobalContext);
 }

@@ -1,23 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import GlobalProvider from "./contexts/GlobalContext";
 import Homepage from "./pages/Homepage";
-import SinglePage from "./pages/SinglePage";
-import { GlobalProvider } from "./contexts/GlobalContext";
-import { OffcanvasProvider } from "./contexts/OffcanvasContext";
-import Offcanvas from "./components/Offcanvas.jsx";
-function App() {
+import SingleProduct from "./components/SingleProduct";
+
+export default function App() {
   return (
-    <GlobalProvider>
-      <OffcanvasProvider>
-        <Offcanvas />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="product/:id" element={<SinglePage />} />
-          </Routes>
-        </BrowserRouter>
-      </OffcanvasProvider>
-    </GlobalProvider>
+    <BrowserRouter>
+      <GlobalProvider>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/product/:id" element={<SingleProduct />} />
+          {/* Aggiungeremo la SinglePage nel prossimo step */}
+        </Routes>
+      </GlobalProvider>
+    </BrowserRouter>
   );
 }
-
-export default App;
