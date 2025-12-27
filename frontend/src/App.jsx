@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalProvider from "./contexts/GlobalContext";
 import Homepage from "./pages/Homepage";
-import SingleProduct from "./components/SingleProduct";
+import SingleProduct from "./pages/SingleProduct";
 
 export default function App() {
   return (

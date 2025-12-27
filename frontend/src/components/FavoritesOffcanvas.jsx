@@ -67,7 +67,7 @@ function FavoriteRow({ productId, onRemove }) {
         style={{ width: "45px", height: "45px", objectFit: "cover" }}
         className="me-2 rounded"
       />
-      <span className="flex-grow-1 small fw-bold">{item.title}</span>
+      <span className="me-auto small fw-bold">{item.title}</span>
       <button
         className="btn btn-sm text-danger fs-5"
         onClick={() => onRemove(productId)}
