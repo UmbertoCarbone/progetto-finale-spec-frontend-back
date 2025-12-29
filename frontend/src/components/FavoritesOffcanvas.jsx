@@ -23,9 +23,11 @@ export default function FavoritesOffcanvas({
         style={{
           display: isOpen ? "block" : "none",
           visibility: isOpen ? "visible" : "hidden",
+          width: "350px",
+          maxWidth: "90vw",
         }}
       >
-        <div className="offcanvas-header bg-danger text-white">
+        <div className="offcanvas-header bg-primary text-white">
           <h5 className="offcanvas-title">
             I miei Preferiti ({favorites.length})
           </h5>
@@ -41,7 +43,7 @@ export default function FavoritesOffcanvas({
           ))}
           {favorites.length > 0 && (
             <button
-              className="btn btn-outline-danger w-100 mt-3"
+              className="btn btn-outline-primary w-100 mt-3"
               onClick={() => {
                 setFavorites([]);
                 onClose();
@@ -59,13 +61,19 @@ export default function FavoritesOffcanvas({
 function FavoriteRow({ productId, onRemove }) {
   const item = useProductFetch(productId);
   if (!item)
-    return <div className="p-2 border-bottom mb-2 small">Caricamento...</div>;
+    return (
+      <div className="d-flex align-items-center mb-2 p-2 border rounded shadow-sm">
+        <span className="me-auto small">Caricamento...</span>
+      </div>
+    );
+
   return (
     <div className="d-flex align-items-center mb-2 p-2 border rounded shadow-sm">
       <img
         src={item.imageUrl}
         style={{ width: "45px", height: "45px", objectFit: "cover" }}
         className="me-2 rounded"
+        alt={item.title}
       />
       <span className="me-auto small fw-bold">{item.title}</span>
       <button

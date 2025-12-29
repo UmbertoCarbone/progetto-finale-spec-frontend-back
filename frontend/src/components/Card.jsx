@@ -2,17 +2,18 @@ import useProductFetch from "../contexts/useProductFetch.jsx";
 import { Link } from "react-router-dom";
 
 export default function Card({
-  productId,
-  onCompare,
-  isCompared,
-  onFavorite,
-  isFavorite,
+  productId, // ID del prodotto da mostrare
+  onCompare, // Funzione callback per aggiungere/rimuovere dal confronto
+  isCompared, // Booleano: il prodotto è già in confronto?
+  onFavorite, // Funzione callback per aggiungere/rimuovere dai preferiti
+  isFavorite, // Booleano: il prodotto è già nei preferiti?
 }) {
   const item = useProductFetch(productId);
-
+  // Recupera i dati del prodotto dal context
+  
   if (!item)
     return <div className="col-md-4 mb-4 text-center p-5">Caricamento...</div>;
-
+  // Mostra un placeholder mentre i dati vengono caricati.
   return (
     <div className="col-md-4 mb-4">
       <div className="card h-100 shadow-sm position-relative">
