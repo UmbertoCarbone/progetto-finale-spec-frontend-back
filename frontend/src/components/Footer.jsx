@@ -1,9 +1,9 @@
 export default function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer className="bg-dark text-white text-center py-4 mt-5">
-      <div className="container">
-        <p className="mb-1">&copy; {new Date().getFullYear()} Game Store - Progetto Boolean</p>
-        <small className="">Creato da Umberto • Powered by Boolean</small>
+    <footer className="bg-dark text-white py-3 mt-5">
+      <div className="container text-center">
+        <small>© {year} GameHub • Tutti i diritti riservati</small>
       </div>
     </footer>
   );
