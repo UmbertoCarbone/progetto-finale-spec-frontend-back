@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GlobalProvider } from "./contexts/GlobalContext";
-import Homepage from "./pages/Hompeage"
+import Homepage from "./pages/Hompeage";
+import SingleProduct from "./pages/SingleProduct";
 
 export default function App() {
   return (
@@ -11,8 +12,7 @@ export default function App() {
           {/* Rotta principale con la lista prodotti */}
           <Route path="/" element={<Homepage />} />
 
-          {/* Rotta dettaglio (la attiveremo quando creerai il componente) */}
-          {/* <Route path="/product/:id" element={<SingleProduct />} /> */}
+          <Route path="/product/:id" element={<SingleProduct />} />
         </Routes>
       </BrowserRouter>
     </GlobalProvider>

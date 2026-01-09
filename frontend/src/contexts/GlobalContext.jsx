@@ -19,7 +19,8 @@ const GlobalProvider = ({ children }) => {
     });
 
     const fullData = await Promise.all(promises);
-    setProducts(fullData);
+    setProducts(fullData)
+    console.log("fetch eseguito", fullData);
   }
 
   // 2. Fetch singolo per la pagina di dettaglio
