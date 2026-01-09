@@ -4,7 +4,28 @@ const GlobalContext = createContext();
 const apiUrl = import.meta.env.VITE_REACT_APP_URL_JSON;
 
 const GlobalProvider = ({ children }) => {
+  // arr di prodotti
   const [products, setProducts] = useState([]);
+
+  // stato per i 2 giochi da confrontare
+  const [compareList, setCompareList] = useState([]);
+
+  const toggleCompare = (product) => {
+    setCompareList((list) => {
+      // Se il prodotto è già nella 'list', lo tolgo
+      if (list.find((p) => p.id === product.id)) {
+        return list.filter((p) => p.id !== product.id);
+      }
+
+      // Se nella 'list' ci sono già 2 elementi, blocco l'aggiunta
+      if (list.length >= 2) {
+        return list;
+      }
+
+      // Altrimenti aggiungo il prodotto alla 'list'
+      return [...list, product];
+    });
+  };
 
   // 1. Fetch della lista e arricchimento dati con Promise.all
   async function fetchProducts() {
@@ -19,7 +40,7 @@ const GlobalProvider = ({ children }) => {
     });
 
     const fullData = await Promise.all(promises);
-    setProducts(fullData)
+    setProducts(fullData);
     console.log("fetch eseguito", fullData);
   }
 
@@ -37,6 +58,8 @@ const GlobalProvider = ({ children }) => {
         setProducts,
         fetchProducts,
         fetchProductById,
+        compareList,
+        toggleCompare,
       }}
     >
       {children}
