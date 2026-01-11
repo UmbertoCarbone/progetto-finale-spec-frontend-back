@@ -4,7 +4,7 @@ import ProductFilters from "./ProductFilters";
 import { Link } from "react-router-dom";
 
 export default function ProductList() {
-  // 1. Estrazione dati dal GlobalContext (aggiunti favorites e toggleFavorite)
+  // 1. Estrazione dati dal GlobalContext
   const {
     products,
     fetchProducts,
@@ -19,46 +19,52 @@ export default function ProductList() {
   const [category, setCategory] = useState("");
   const [order, setOrder] = useState("");
 
-  // 3. Fetch iniziale
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  // --- FUNZIONI DI UTILITY ---
-
-  const checkIsInCompare = (p) => compareList.some((item) => item.id === p.id);
-
-  // Controllo se il prodotto è nei preferiti
-  const checkIsFavorite = (p) => favorites.some((item) => item.id === p.id);
-
+  // Gestione click sul bottone confronto
   const handleCompareClick = (e, product) => {
     e.preventDefault();
+    // evitare il redirect di tutta la card nella single page
     e.stopPropagation();
     toggleCompare(product);
   };
 
-  // Gestione click preferiti: blocca il Link e attiva il toggle
+  // Gestione click sul bottone preferiti
   const handleFavoriteClick = (e, product) => {
     e.preventDefault();
+    // evitare il redirect di tutta la card nella single page
     e.stopPropagation();
     toggleFavorite(product);
   };
 
-  // --- LOGICA FILTRAGGIO ---
+  // Filtra i prodotti in base alla ricerca
   const filterBySearch = (p) =>
     (p.title || "").toLowerCase().startsWith(search.trim().toLowerCase());
 
+  // Filtra i prodotti in base alla categoria selezionata
   const filterByCategory = (p) => !category || p.category === category;
 
+  // Ordina i prodotti per titolo (A/Z)
   const sortByOrder = (a, b) =>
     order === "asc"
       ? a.title.localeCompare(b.title)
       : b.title.localeCompare(a.title);
 
+  // Applica filtri e ordinamento ai prodotti
   const filteredProducts = products
     .filter(filterBySearch)
     .filter(filterByCategory)
     .sort(sortByOrder);
+  //log di prova
+
+  /*  console.log("Prodotti filtrati:", filteredProducts); */
+
+  // Controlla se il prodotto è già presente nella lista di confronto
+  const checkIsInCompare = (p) => compareList.some((item) => item.id === p.id);
+  // Verifica se il prodotto è tra i preferiti
+  const checkIsFavorite = (p) => favorites.some((item) => item.id === p.id);
 
   return (
     <div className="container mt-5">
@@ -102,15 +108,21 @@ export default function ProductList() {
                       )}
                     </div>
 
-                    <div className="mb-2">
-                      <span className="badge bg-secondary me-2">
-                        {p.category}
-                      </span>
-                      {p.platform && (
-                        <span className="badge bg-info text-dark">
+                    <div className="mb-2 d-flex flex-column gap-2">
+                      <div className="d-flex align-items-center">
+                        <p className="mb-0 fw-semibold me-2">Piattaforma:</p>
+                        <span className="badge badge-bg-info-opacity-blue text-dark d-flex align-items-center px-2 py-2 fs-6 fw-bold">
                           {p.platform}
+                          <i className="bi bi-controller ms-2"></i>
                         </span>
-                      )}
+                      </div>
+                      <div className="d-flex align-items-center">
+                        <p className="mb-0 fw-semibold me-2">Categoria:</p>
+                        <span className="badge badge-bg-info-opacity-violet text-dark d-flex align-items-center px-2 py-2 fs-6 fw-bold">
+                          {p.category}
+                          <i className="bi bi-controller ms-2"></i>
+                        </span>
+                      </div>
                     </div>
 
                     <p className="card-text text-muted small">
@@ -144,7 +156,6 @@ export default function ProductList() {
                             : " Confronta"}
                         </button>
 
-                       
                         <button
                           className={`btn z-3 shadow-sm flex-fill py-2 ${
                             checkIsFavorite(p)
@@ -153,9 +164,7 @@ export default function ProductList() {
                           }`}
                           onClick={(e) => handleFavoriteClick(e, p)}
                         >
-                          {checkIsFavorite(p)
-                            ? "❤️‍🔥"
-                            : "Aggiungi ai preferiti"}
+                          {checkIsFavorite(p) ? "Salvato ❤️‍🔥" : "Aggiungi"}
                         </button>
                       </div>
                     </div>

@@ -55,3 +55,14 @@ h3 {
   left: 0;
   /* Entra da sinistra */
 }
+
+
+
+/* ProductList.css */
+.badge-bg-info-opacity-violet {
+  background-color: rgba(124, 16, 177, 0.5) !important; /* bg-info con opacità */
+}
+
+.badge-bg-info-opacity-blue {
+  background-color: rgba(37, 16, 177, 0.5) !important; /* bg-info con opacità */
+}
