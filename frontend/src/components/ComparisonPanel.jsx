@@ -3,35 +3,25 @@ import { GlobalContext } from "../contexts/GlobalContext";
 
 export default function ComparisonPanel() {
   const { compareList, toggleCompare } = useContext(GlobalContext);
-  const [isVisible, setIsVisible] = useState(false);
+  //controllo canvas "X"
+  const [showPanel, setShowPanel] = useState(false);
 
   useEffect(() => {
-    if (compareList.length > 0) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  }, [compareList.length]);
+    setShowPanel(compareList.length > 0);
+  }, [compareList]);
 
-  if (compareList.length === 0) return null;
+  if (!showPanel) return null;
 
   return (
     <>
-      {isVisible && (
-        <div className="overlay" onClick={() => setIsVisible(false)}></div>
-      )}
-
-      <div
-        className={`comparison-sidebar ${
-          isVisible ? "open" : ""
-        } text-white d-flex flex-column shadow-lg`}
-      >
-        {/* Header */}
+      <div className={`comparison-sidebar open`}>
         <div className="d-flex justify-content-between align-items-center border-bottom border-secondary pb-3 mb-3">
-          <h4 className="mb-0 fw-bold">Confronto ({compareList.length}/2)</h4>
+          <h4 className="mb-0 fw-bold text-white">
+            Confronto ({compareList.length}/2)
+          </h4>
           <button
             className="btn-close btn-close-white"
-            onClick={() => setIsVisible(false)}
+            onClick={() => setShowPanel(false)}
           ></button>
         </div>
 
@@ -73,7 +63,9 @@ export default function ComparisonPanel() {
                     {product.platform}
                   </span>
                 </div>
+
                 <p>{product.description}</p>
+
                 <div className="border-top border-secondary pt-2 mt-2">
                   <p className="mb-1 small text-secondary">
                     Genere: {product.category}
@@ -81,20 +73,11 @@ export default function ComparisonPanel() {
                   <p className="mb-1 small text-secondary">
                     Anno: {product.releaseYear}
                   </p>
-                  <h5 className=" fw-bold">
-                    {product.price}€
-                  </h5>
+                  <h5 className=" fw-bold">{product.price}€</h5>
                 </div>
               </div>
             </div>
           ))}
-
-          {/* Messaggio discreto solo se manca il secondo gioco */}
-          {compareList.length === 1 && (
-            <p className="text-center text-muted small mt-2">
-              <i>Aggiungi un altro titolo per sbloccare il confronto</i>
-            </p>
-          )}
         </div>
       </div>
     </>

@@ -1,5 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -13,11 +14,12 @@ h3 {
 .comparison-sidebar {
   position: fixed;
   top: 0;
-  right: -450px; /* Nasconde il pannello (largo 450px) */
+  right: -450px;
+  /* Nasconde il pannello (largo 450px) */
   width: 350px;
   height: 100vh;
   background: #202428;
-  box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease-in-out;
   z-index: 1000;
   padding: 20px;
@@ -26,5 +28,30 @@ h3 {
 
 /* Classe che attiviamo quando c'è almeno un prodotto */
 .comparison-sidebar.open {
-  right: 0; /* Lo porta a vista */
+  right: 0;
+  /* Lo porta a vista */
+}
+
+
+/* Sidebar Preferiti (Sinistra) */
+.favorites-sidebar {
+  position: fixed;
+  top: 0;
+  left: -350px;
+  /* Nascosta a sinistra */
+  width: 350px;
+  height: 100vh;
+  background: #1a1d20;
+  /* Leggermente più scuro per distinguerlo */
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+  transition: left 0.4s ease-in-out;
+  z-index: 1050;
+  /* Sopra tutto */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.favorites-sidebar.open {
+  left: 0;
+  /* Entra da sinistra */
 }

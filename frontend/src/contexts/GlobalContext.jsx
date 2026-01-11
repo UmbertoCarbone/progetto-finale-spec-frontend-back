@@ -12,20 +12,14 @@ const GlobalProvider = ({ children }) => {
 
   const toggleCompare = (product) => {
     setCompareList((list) => {
-      // Se il prodotto è già nella 'list', lo tolgo
-      if (list.find((p) => p.id === product.id)) {
-        return list.filter((p) => p.id !== product.id);
-      }
-
-      // Se nella 'list' ci sono già 2 elementi, blocco l'aggiunta
-      if (list.length >= 2) {
-        return list;
-      }
-
-      // Altrimenti aggiungo il prodotto alla 'list'
+      const exists = list.some((p) => p.id === product.id);
+      if (exists) return list.filter((p) => p.id !== product.id);
+      if (list.length >= 2) return list;
       return [...list, product];
     });
   };
+
+  
 
   // 1. Fetch della lista e arricchimento dati con Promise.all
   async function fetchProducts() {
@@ -38,7 +32,7 @@ const GlobalProvider = ({ children }) => {
       // Restituiamo direttamente l'oggetto scompattato
       return data.product;
     });
-
+    //promise.all per chiamare tutti i prodotti con async/await
     const fullData = await Promise.all(promises);
     setProducts(fullData);
     console.log("fetch eseguito", fullData);

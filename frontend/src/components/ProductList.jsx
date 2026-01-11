@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 export default function ProductList() {
   // 1. Estrazione dati dal GlobalContext
-  const { products, fetchProducts, compareList, toggleCompare } = useContext(GlobalContext);
+  const { products, fetchProducts, compareList, toggleCompare } =
+    useContext(GlobalContext);
 
   // 2. Stati per i filtri
   const [search, setSearch] = useState("");
@@ -70,18 +71,6 @@ export default function ProductList() {
             <div key={p.id} className="col">
               <Link to={`/product/${p.id}`} className="text-decoration-none">
                 <div className="card h-100 shadow-sm border-0 position-relative">
-                  {/* BOTTONE CONFRONTO */}
-                  <button
-                    className={`btn btn-sm position-absolute top-0 end-0 m-2 z-3 shadow-sm ${
-                      checkIsInCompare(p)
-                        ? "btn-success"
-                        : "btn-dark opacity-75"
-                    }`}
-                    onClick={(e) => handleCompareClick(e, p)}
-                  >
-                    {checkIsInCompare(p) ? "✓ In confronto" : "+ Confronta"}
-                  </button>
-
                   <img
                     src={p.imageUrl || "https://via.placeholder.com/250"}
                     className="card-img-top"
@@ -123,9 +112,26 @@ export default function ProductList() {
                       <p className="text-primary fw-bold fs-5">
                         {p.price ? `${p.price}€` : "Prezzo non disponibile"}
                       </p>
-                      <button className="btn btn-primary w-100">
-                        Dettagli
-                      </button>
+                      <div className="d-flex align-items-center gap-2">
+                        <button className="btn btn-primary flex-fill py-2">
+                          Dettagli
+                        </button>
+                        <button
+                          className={`btn z-3 shadow-sm flex-fill py-2 ${
+                            checkIsInCompare(p)
+                              ? "btn-success"
+                              : "btn-dark opacity-75"
+                          }`}
+                          onClick={(e) => handleCompareClick(e, p)}
+                        >
+                          {checkIsInCompare(p)
+                            ? "✓ In confronto"
+                            : " Confronta"}
+                        </button>
+                        <button className="btn btn-outline-secondary flex-fill py-2">
+                          Placeholder
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
