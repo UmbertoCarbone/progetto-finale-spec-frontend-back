@@ -81,18 +81,23 @@ export default function ProductList() {
         setOrder={setOrder}
         products={products}
       />
-      <button
-        className="btn btn-outline-danger"
-        onClick={() => setIsFavOpen(!isFavOpen)}
-      >
-        {isFavOpen ? "Chiudi Preferiti" : "Apri Preferiti"}
-      </button>
-      <button
-        className="btn btn-outline-secondary"
-        onClick={() => setShowPanel(!showPanel)}
-      >
-        Toggle Confronto
-      </button>
+
+      <div className="d-flex justify-content-center mt-4">
+        <button
+          className="btn btn-outline-danger px-4 py-2 fw-semibold shadow-sm"
+          onClick={() => setIsFavOpen(!isFavOpen)}
+          type="button"
+        >
+          {isFavOpen ? "Chiudi Preferiti" : "Apri Preferiti"}
+        </button>
+        <button
+          className="btn btn-outline-success px-4 py-2 fw-semibold shadow-sm ms-3"
+          onClick={() => setShowPanel(!showPanel)}
+          type="button"
+        >
+          {showPanel ? "Chiudi Confronto" : "Confronto Prodotti"}
+        </button>
+      </div>
 
       {filteredProducts.length === 0 ? (
         <div
