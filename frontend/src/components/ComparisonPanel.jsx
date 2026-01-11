@@ -1,14 +1,9 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../contexts/GlobalContext";
 
 export default function ComparisonPanel() {
-  const { compareList, toggleCompare } = useContext(GlobalContext);
-  //controllo canvas "X"
-  const [showPanel, setShowPanel] = useState(false);
-
-  useEffect(() => {
-    setShowPanel(compareList.length > 0);
-  }, [compareList]);
+  const { compareList, toggleCompare, showPanel, setShowPanel } =
+    useContext(GlobalContext);
 
   if (!showPanel) return null;
 

@@ -16,6 +16,8 @@ const GlobalProvider = ({ children }) => {
   });
   // Stato per la visibilità del popup dei preferiti
   const [isFavOpen, setIsFavOpen] = useState(false);
+  //Apri a chiude pag di confronto
+  const [showPanel, setShowPanel] = useState(false);
 
   // Stato per la lista di confronto prodotti (max 2)
   const [compareList, setCompareList] = useState([]);
@@ -25,6 +27,12 @@ const GlobalProvider = ({ children }) => {
     localStorage.setItem("my_favorites", JSON.stringify(favorites));
   }, [favorites]);
 
+//apri e chiude pag di confronto
+  useEffect(() => {
+    setShowPanel(compareList.length > 0);
+  }, [compareList]);
+
+  
   // Aggiunge o rimuove un prodotto dai preferiti
   const toggleFavorite = (product) => {
     setFavorites((prev) => {
@@ -96,6 +104,8 @@ const GlobalProvider = ({ children }) => {
         setIsFavOpen, // Funzione per mostrare/nascondere il popup dei preferiti
         compareList, // Array dei prodotti selezionati per il confronto (max 2)
         toggleCompare, // Funzione per aggiungere/rimuovere prodotti dalla lista di confronto
+        showPanel,
+        setShowPanel,
       }}
     >
       {children}

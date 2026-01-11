@@ -12,6 +12,10 @@ export default function ProductList() {
     toggleCompare,
     favorites,
     toggleFavorite,
+    isFavOpen,
+    setIsFavOpen,
+    showPanel,
+    setShowPanel,
   } = useContext(GlobalContext);
 
   // 2. Stati per i filtri
@@ -77,6 +81,18 @@ export default function ProductList() {
         setOrder={setOrder}
         products={products}
       />
+      <button
+        className="btn btn-outline-danger"
+        onClick={() => setIsFavOpen(!isFavOpen)}
+      >
+        {isFavOpen ? "Chiudi Preferiti" : "Apri Preferiti"}
+      </button>
+      <button
+        className="btn btn-outline-secondary"
+        onClick={() => setShowPanel(!showPanel)}
+      >
+        Toggle Confronto
+      </button>
 
       {filteredProducts.length === 0 ? (
         <div
