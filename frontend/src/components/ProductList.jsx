@@ -4,9 +4,15 @@ import ProductFilters from "./ProductFilters";
 import { Link } from "react-router-dom";
 
 export default function ProductList() {
-  // 1. Estrazione dati dal GlobalContext
-  const { products, fetchProducts, compareList, toggleCompare } =
-    useContext(GlobalContext);
+  // 1. Estrazione dati dal GlobalContext (aggiunti favorites e toggleFavorite)
+  const {
+    products,
+    fetchProducts,
+    compareList,
+    toggleCompare,
+    favorites,
+    toggleFavorite,
+  } = useContext(GlobalContext);
 
   // 2. Stati per i filtri
   const [search, setSearch] = useState("");
@@ -20,14 +26,22 @@ export default function ProductList() {
 
   // --- FUNZIONI DI UTILITY ---
 
-  // Controllo se il prodotto è già in lista confronto
   const checkIsInCompare = (p) => compareList.some((item) => item.id === p.id);
 
-  // Gestione click sul bottone confronto (blocca il Link e attiva il toggle)
+  // Controllo se il prodotto è nei preferiti
+  const checkIsFavorite = (p) => favorites.some((item) => item.id === p.id);
+
   const handleCompareClick = (e, product) => {
     e.preventDefault();
     e.stopPropagation();
     toggleCompare(product);
+  };
+
+  // Gestione click preferiti: blocca il Link e attiva il toggle
+  const handleFavoriteClick = (e, product) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFavorite(product);
   };
 
   // --- LOGICA FILTRAGGIO ---
@@ -113,9 +127,10 @@ export default function ProductList() {
                         {p.price ? `${p.price}€` : "Prezzo non disponibile"}
                       </p>
                       <div className="d-flex align-items-center gap-2">
-                        <button className="btn btn-primary flex-fill py-2">
+                        <button className="btn btn-primary z-3 shadow-sm flex-fill py-2">
                           Dettagli
                         </button>
+
                         <button
                           className={`btn z-3 shadow-sm flex-fill py-2 ${
                             checkIsInCompare(p)
@@ -128,8 +143,19 @@ export default function ProductList() {
                             ? "✓ In confronto"
                             : " Confronta"}
                         </button>
-                        <button className="btn btn-outline-secondary flex-fill py-2">
-                          Placeholder
+
+                       
+                        <button
+                          className={`btn z-3 shadow-sm flex-fill py-2 ${
+                            checkIsFavorite(p)
+                              ? "btn-danger"
+                              : "btn-outline-danger"
+                          }`}
+                          onClick={(e) => handleFavoriteClick(e, p)}
+                        >
+                          {checkIsFavorite(p)
+                            ? "❤️‍🔥"
+                            : "Aggiungi ai preferiti"}
                         </button>
                       </div>
                     </div>
