@@ -27,12 +27,11 @@ const GlobalProvider = ({ children }) => {
     localStorage.setItem("my_favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-//apri e chiude pag di confronto
+  //apri e chiude pag di confronto
   useEffect(() => {
     setShowPanel(compareList.length > 0);
   }, [compareList]);
 
-  
   // Aggiunge o rimuove un prodotto dai preferiti
   const toggleFavorite = (product) => {
     setFavorites((prev) => {
@@ -68,7 +67,7 @@ const GlobalProvider = ({ children }) => {
 
       const fullData = await Promise.all(promises);
       setProducts(fullData);
-
+      //log dei dati
       console.log(
         "%cProdotti caricati dal globalContext:",
         "color: #00bfff; font-weight: bold;",
@@ -78,7 +77,7 @@ const GlobalProvider = ({ children }) => {
       console.error("Errore fetch:", err);
     }
   }
-
+  //Recupero prodotti tramite id (pagina singleProduct)
   async function fetchProductById(id) {
     try {
       const response = await fetch(`${apiUrl}/${id}`);
