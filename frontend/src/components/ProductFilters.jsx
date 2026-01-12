@@ -15,6 +15,12 @@ export default function ProductFilters({
   // log per testare la categorie
   /* console.log(categories) */
 
+
+  //funzione per il valore corrente del campo input
+  function handleChange(setter) {
+  return (e) => setter(e.target.value);
+}
+
   return (
     <div className="row g-3 p-3 bg-light border rounded">
       <div className="col-md-4">
@@ -23,7 +29,7 @@ export default function ProductFilters({
           className="form-control"
           placeholder="Cerca..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleChange(setSearch)}
         />
       </div>
 
@@ -32,7 +38,7 @@ export default function ProductFilters({
         <select
           className="form-select"
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={handleChange(setCategory)}
         >
           <option value="">Tutte le categorie</option>
           {categories.map((c) => (
@@ -48,7 +54,7 @@ export default function ProductFilters({
         <select
           className="form-select"
           value={order}
-          onChange={(e) => setOrder(e.target.value)}
+          onChange={handleChange(setOrder)}
         >
           <option value="">Casuale</option>
           <option value="asc">A-Z</option>
