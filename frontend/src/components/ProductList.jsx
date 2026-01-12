@@ -24,9 +24,12 @@ export default function ProductList() {
   const [order, setOrder] = useState("");
 
   useEffect(() => {
-    fetchProducts();
+    async function fetchData() {
+      await fetchProducts();
+    }
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   // Gestione click sul bottone confronto
   const handleCompareClick = (e, product) => {
     e.preventDefault();

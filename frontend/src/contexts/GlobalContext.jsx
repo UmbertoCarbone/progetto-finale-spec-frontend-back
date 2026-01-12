@@ -104,8 +104,8 @@ const GlobalProvider = ({ children }) => {
         setIsFavOpen, // Funzione per mostrare/nascondere il popup dei preferiti
         compareList, // Array dei prodotti selezionati per il confronto (max 2)
         toggleCompare, // Funzione per aggiungere/rimuovere prodotti dalla lista di confronto
-        showPanel,
-        setShowPanel,
+        showPanel, // Stato del pannello aperto e chiuso
+        setShowPanel, //funzione del pannello
       }}
     >
       {children}

@@ -11,25 +11,13 @@ export default function SingleProduct() {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    // Funzione async per gestire la chiamata API
-    async function loadProduct() {
-      try {
-        // Chiama l'API per ottenere il prodotto con l'id specifico
-        const data = await fetchProductById(id);
-
-        // Salva i dati del prodotto nello stato locale (setProduct)
-        setProduct(data);
-      } catch (error) {
-        // Gestisce eventuali errori durante il fetch
-        console.error("Errore nel caricamento del prodotto:", error);
-      } finally {
-        // Conferma che il fetch è stato eseguito
-        console.log(`fetch con id "${id}" corretto`);
-      }
+    async function fetchDataSingleProduct() {
+      const data = await fetchProductById(id);
+      setProduct(data);
+      console.log(`fetch con id "${id}" corretto`);
     }
-
-    // Esegue la funzione di caricamento
-    loadProduct();
+    fetchDataSingleProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -94,7 +82,7 @@ export default function SingleProduct() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
